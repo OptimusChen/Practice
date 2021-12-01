@@ -21,15 +21,16 @@ public abstract class PracticeCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (commandSender.hasPermission(permission)){
-            commandSender.sendMessage(ChatColor.RED + "No Permission!");
+            commandSender.sendMessage(ChatColor.RED + "You dont have permission to execute this command!");
             return true;
         }
 
         if (requiresPlayer){
             if (commandSender instanceof Player){
                 execute((Player) commandSender, strings);
-            }else{
+            } else {
                 commandSender.sendMessage(ChatColor.RED + "Only players can run this command!");
+                return true;
             }
         }
 
