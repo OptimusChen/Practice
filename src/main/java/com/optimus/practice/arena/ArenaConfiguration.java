@@ -32,4 +32,8 @@ public class ArenaConfiguration {
         }
     }
 
+    public void update(){
+        configuration = YamlConfiguration.loadConfiguration(file);
+    }
+
 }

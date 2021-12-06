@@ -1,6 +1,8 @@
-package com.optimus.practice.player;
+package com.optimus.practice.config;
 
-import com.optimus.practice.Main;
+import com.optimus.practice.Practice;
+import com.optimus.practice.player.PlayerConfiguration;
+import com.optimus.practice.player.PracticePlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -11,14 +13,14 @@ import java.io.IOException;
 
 public class PlayerConfig {
 
-    private static Main main = Main.getInstance();
+    private static Practice practice = Practice.getInstance();
 
     public static void createPlayerFile(Player player){
-        File folder = new File(main.getDataFolder() + File.separator + "Players");
+        File folder = new File(practice.getDataFolder() + File.separator + "Players");
         if (!folder.exists()) {
             folder.mkdirs();
         }
-        File playerFile = new File(main.getDataFolder() + File.separator + "Players" + File.separator + Bukkit.getPlayer(player.getName()).getUniqueId() + ".yml");
+        File playerFile = new File(practice.getDataFolder() + File.separator + "Players" + File.separator + Bukkit.getPlayer(player.getName()).getUniqueId() + ".yml");
         if (!playerFile.exists()) {
             try{
                 playerFile.createNewFile();

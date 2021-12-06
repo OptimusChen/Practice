@@ -1,25 +1,39 @@
 package com.optimus.practice.player;
 
+import com.optimus.practice.arena.Wand;
 import com.optimus.practice.scoreboard.Scoreboard;
+import com.optimus.practice.scoreboard.ScoreboardState;
+import com.optimus.practice.util.ItemCreator;
 import lombok.Setter;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import lombok.Getter;
+import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+@Getter @Setter
 public class PracticePlayer {
 
-    @Getter @Setter
     public PlayerConfiguration config;
-    @Getter
+    private Wand wand;
     private int wins;
-    @Getter
     private int losses;
-    @Getter
     private int points;
     private int globalRanking;
     private Scoreboard board;
-    @Getter
     private Player player;
+    private ArrayList<Location> wandLocs;
+    private ArrayList<Location> spawnLocations;
+    private ScoreboardState scoreboardState;
+    private PracticePlayer opponent;
+    private HashMap<Integer, ItemStack> inventory;
+    private HashMap<Integer, ItemStack> armor;
 
     public PracticePlayer(Player player){
         this.wins = 0;
@@ -27,6 +41,12 @@ public class PracticePlayer {
         this.points = 0;
         this.globalRanking = 0;
         this.player = player;
+        this.wandLocs = new ArrayList<>();
+        this.spawnLocations = new ArrayList<>();
+        this.scoreboardState = ScoreboardState.LOBBY;
+        this.opponent = null;
+        this.inventory = new HashMap<>();
+        this.armor = new HashMap<>();
     }
 
     public void init(){
@@ -38,6 +58,8 @@ public class PracticePlayer {
         }catch (NullPointerException e){
 
         }
+
+        //player.getInventory().setItem(0, ItemCreator.createInventoryItem());
     }
 
     public int getGlobalRanking(){
@@ -51,10 +73,52 @@ public class PracticePlayer {
             losses = (int) config.getValue("Losses");
             points = (int) config.getValue("Points");
         }catch (NullPointerException e){
-            Bukkit.getLogger().info("Config: " + config);
-            Bukkit.getLogger().info("Val: " + config.getValue("Wins"));
-            Bukkit.getLogger().info("int: " + (int) config.getValue("Wins"));
         }
         board.updateScoreboard();
     }
+
+    public void setSpawnLocations(Location loc, int index) {
+        if (index == 1){
+            if (spawnLocations.size() == 0){
+                spawnLocations.add(loc);
+            }else{
+                spawnLocations.set(0, loc);
+            }
+        }else{
+            if (spawnLocations.size() == 0){
+
+            } else if (spawnLocations.size() == 1){
+                spawnLocations.add(loc);
+            }else{
+                spawnLocations.set(1, loc);
+            }
+        }
+    }
+
+    public void setWandLocations(Location loc, boolean left) {
+        if (!left) {
+            if (wandLocs.size() == 0) {
+                wandLocs.add(loc);
+            } else {
+                wandLocs.set(0, loc);
+            }
+        } else {
+            if (wandLocs.size() == 0) {
+
+            } else if (wandLocs.size() == 1) {
+                wandLocs.add(loc);
+            } else {
+                wandLocs.set(1, loc);
+            }
+        }
+    }
+
+    public void sendMessage(Object message){
+        if (message instanceof String){
+            getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', message.toString()));
+        }else if (message instanceof TextComponent){
+            getPlayer().spigot().sendMessage((TextComponent) message);
+        }
+    }
+
 }
