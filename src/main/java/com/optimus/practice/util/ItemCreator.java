@@ -1,6 +1,6 @@
 package com.optimus.practice.util;
 
-import com.optimus.practice.arena.Wand;
+import com.optimus.practice.wand.Wand;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -8,7 +8,6 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.lang.invoke.SerializedLambda;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -60,8 +60,9 @@ public abstract class Arena implements Listener {
         players.add(player1);
         players.add(player2);
         active = true;
+        player1.getInventory().clear();
+        player2.getInventory().clear();
         for (Player player : players){
-            player.getInventory().clear();
             PracticePlayerManager.getPlayer(player).setScoreboardState(ScoreboardState.IN_GAME);
             player.setGameMode(GameMode.ADVENTURE);
             new BukkitRunnable() {

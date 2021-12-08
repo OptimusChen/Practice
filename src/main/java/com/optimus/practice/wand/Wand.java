@@ -1,4 +1,4 @@
-package com.optimus.practice.arena;
+package com.optimus.practice.wand;
 
 import com.optimus.practice.Practice;
 import com.optimus.practice.player.PracticePlayer;

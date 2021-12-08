@@ -89,6 +89,13 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.google.code</groupId>
+            <artifactId>actionbarapi</artifactId>
+            <version>2.3</version>
+            <scope>system</scope>
+            <systemPath>c:/Users/derek/Downloads/ActionBarAPI-1.5.4.jar</systemPath>
+    </dependency>
     </dependencies>
 
 </project>

@@ -106,8 +106,10 @@ public class EventListener implements Listener {
         if (e.getEntity() instanceof Player){
             Player player = (Player) e.getEntity();
             PracticePlayer practicePlayer = PracticePlayerManager.getPlayer(player);
-            if (practicePlayer.getScoreboardState().equals(ScoreboardState.LOBBY)) {
-                e.setCancelled(true);
+            if (practicePlayer != null){
+                if (practicePlayer.getScoreboardState().equals(ScoreboardState.LOBBY)) {
+                    e.setCancelled(true);
+                }
             }
         }
     }

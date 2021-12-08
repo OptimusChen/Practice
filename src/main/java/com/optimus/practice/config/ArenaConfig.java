@@ -4,7 +4,9 @@ import com.optimus.practice.Practice;
 import com.optimus.practice.arena.Arena;
 import com.optimus.practice.arena.ArenaConfiguration;
 import com.optimus.practice.arena.ArenaType;
+import com.optimus.practice.arena.arenas.BoxingArena;
 import com.optimus.practice.arena.arenas.PvPArena;
+import com.optimus.practice.arena.arenas.SumoArena;
 import com.optimus.practice.player.PlayerConfiguration;
 import com.optimus.practice.player.PracticePlayerManager;
 import com.optimus.practice.util.KitCreator;
@@ -37,7 +39,11 @@ public class ArenaConfig {
             Arena arena = null;
 
             switch (type) {
+                case BOXING:
+                    arena = new BoxingArena(config);
+                    break;
                 case SUMO:
+                    arena = new SumoArena(config);
                     break;
                 case NODEBUFF:
                     arena = new PvPArena(config, (ArrayList<ItemStack>) config.getValue("kit"), (ArrayList<ItemStack>) config.getValue("armor"));
@@ -65,8 +71,8 @@ public class ArenaConfig {
 
                 config.set("spawns", spawns);
                 config.set("id", String.valueOf(uuid));
-                config.set("kit", KitCreator.createKit(ArenaType.NODEBUFF));
-                config.set("armor", KitCreator.createArmor(ArenaType.NODEBUFF));
+                config.set("kit", KitCreator.createKit(type));
+                config.set("armor", KitCreator.createArmor(type));
                 config.set("name", type.name());
                 config.set("corners", corners);
 
@@ -82,6 +88,10 @@ public class ArenaConfig {
 
         switch (type) {
             case SUMO:
+                arena = new SumoArena(config);
+                break;
+            case BOXING:
+                arena = new BoxingArena(config);
                 break;
             case NODEBUFF:
                 arena = new PvPArena(config, (ArrayList<ItemStack>) config.getValue("kit"), (ArrayList<ItemStack>) config.getValue("kit"));

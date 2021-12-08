@@ -1,9 +1,8 @@
 package com.optimus.practice.commands;
 
-import com.optimus.practice.arena.Wand;
+import com.optimus.practice.wand.Wand;
 import com.optimus.practice.player.PracticePlayer;
 import com.optimus.practice.player.PracticePlayerManager;
-import com.optimus.practice.util.ItemCreator;
 import org.bukkit.entity.Player;
 
 public class WandCommand extends PracticeCommand {

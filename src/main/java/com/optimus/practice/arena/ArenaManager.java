@@ -26,12 +26,6 @@ public class ArenaManager {
 
 
     public Arena createArena(ArenaType type, ArrayList<Location> spawns, ArrayList<Location> corners){
-        switch (type){
-            case SUMO:
-                break;
-            case NODEBUFF:
-                return ArenaConfig.createArenaConfig(type, spawns, corners);
-        }
-        return null;
+        return ArenaConfig.createArenaConfig(type, spawns, corners);
     }
 }

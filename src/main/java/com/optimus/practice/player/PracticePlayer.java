@@ -1,12 +1,10 @@
 package com.optimus.practice.player;
 
-import com.optimus.practice.arena.Wand;
+import com.optimus.practice.wand.Wand;
 import com.optimus.practice.scoreboard.Scoreboard;
 import com.optimus.practice.scoreboard.ScoreboardState;
-import com.optimus.practice.util.ItemCreator;
 import lombok.Setter;
 import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -15,7 +13,6 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 @Getter @Setter
 public class PracticePlayer {

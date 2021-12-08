@@ -19,8 +19,16 @@ public class ArenaCommand extends PracticeCommand {
         super.execute(player, args);
         PracticePlayer practicePlayer = PracticePlayerManager.getPlayer(player);
         if (practicePlayer.getWandLocs().size() == 2){
-            Arena arena = Practice.getArenaManager().createArena(ArenaType.NODEBUFF, practicePlayer.getSpawnLocations(), practicePlayer.getWandLocs());
-            player.sendMessage(ChatColor.GREEN + "Success!");
+            if (args.length == 1){
+                try {
+                    ArenaType type = ArenaType.valueOf(args[0]);
+                    Arena arena = Practice.getArenaManager().createArena(type, practicePlayer.getSpawnLocations(), practicePlayer.getWandLocs());
+                    player.sendMessage(ChatColor.GREEN + "Success creating arena with UUID: " + arena.getInternalID() + " !");
+                }catch (IllegalArgumentException e){
+                    player.sendMessage(ChatColor.RED + "Error! IllegalArgumentException");
+
+                }
+            }
         }
     }
 }
