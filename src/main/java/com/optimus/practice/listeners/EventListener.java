@@ -4,6 +4,7 @@ import com.optimus.practice.Practice;
 import com.optimus.practice.config.PlayerConfig;
 import com.optimus.practice.inventory.RankedQueueInventory;
 import com.optimus.practice.inventory.UnrankedQueueInventory;
+import com.optimus.practice.inventory.UnrankedSelectModeInventory;
 import com.optimus.practice.player.PracticePlayer;
 import com.optimus.practice.player.PracticePlayerManager;
 import com.optimus.practice.scoreboard.ScoreboardState;
@@ -89,14 +90,28 @@ public class EventListener implements Listener {
         if (ChatColor.stripColor(e.getView().getTitle()).equalsIgnoreCase("Unranked Queue")){
             e.setCancelled(true);
             if (e.getSlot() == 13){
-                player.performCommand("queue join unranked");
-                player.closeInventory();
+                UnrankedSelectModeInventory inv = new UnrankedSelectModeInventory();
+                inv.open(player);
             }
         }else if (ChatColor.stripColor(e.getView().getTitle()).equalsIgnoreCase("Ranked Queue")){
             e.setCancelled(true);
             if (e.getSlot() == 13){
                 player.performCommand("queue join ranked");
                 player.closeInventory();
+            }
+        }else if (ChatColor.stripColor(e.getView().getTitle()).equalsIgnoreCase("Solo Unranked Queue")){
+            e.setCancelled(true);
+            if (e.getCurrentItem() != null){
+                if (e.getCurrentItem().getType().equals(Material.DIAMOND_SWORD)){
+                    player.performCommand("queue join unranked nodebuff");
+                    player.closeInventory();
+                }else if (e.getCurrentItem().getType().equals(Material.LEASH)){
+                    player.performCommand("queue join unranked sumo");
+                    player.closeInventory();
+                }else if (e.getCurrentItem().getType().equals(Material.DIAMOND_CHESTPLATE)){
+                    player.performCommand("queue join unranked boxing");
+                    player.closeInventory();
+                }
             }
         }
     }

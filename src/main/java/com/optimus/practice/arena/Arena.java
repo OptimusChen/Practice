@@ -22,13 +22,11 @@ import java.util.List;
 
 import lombok.Getter;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 @Getter
@@ -42,6 +40,7 @@ public abstract class Arena implements Listener {
     private boolean active;
     private ArrayList<Player> players;
     private ArrayList<Location> corners;
+    private boolean finishedCountdown;
 
     public Arena(ArenaConfiguration config){
         this.config = config;
@@ -51,6 +50,7 @@ public abstract class Arena implements Listener {
         this.name = (String) config.getValue("name");
         this.internalID = (String) config.getValue("id");
         this.players = new ArrayList<>();
+        this.finishedCountdown = false;
         Bukkit.getPluginManager().registerEvents(this, Practice.getInstance());
     }
 
@@ -60,6 +60,7 @@ public abstract class Arena implements Listener {
         players.add(player1);
         players.add(player2);
         active = true;
+        finishedCountdown = false;
         player1.getInventory().clear();
         player2.getInventory().clear();
         for (Player player : players){
@@ -91,6 +92,7 @@ public abstract class Arena implements Listener {
                 public void run() {
                     player.sendMessage(ChatColor.GREEN + "Game Starts Now!");
                     player.playSound(player.getLocation(), Sound.LEVEL_UP, 10, 2);
+                    finishedCountdown = true;
                 }
             }.runTaskLater(Practice.getInstance(), 4*20);
         }
@@ -240,4 +242,14 @@ public abstract class Arena implements Listener {
             }
         }
     }
+
+    @EventHandler
+    public void onMove(PlayerMoveEvent e){
+        if (players.contains(e.getPlayer())){
+            if (!finishedCountdown){
+                 e.setCancelled(true);
+            }
+        }
+    }
+
 }

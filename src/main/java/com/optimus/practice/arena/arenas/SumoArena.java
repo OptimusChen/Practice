@@ -23,6 +23,7 @@ public class SumoArena extends Arena {
     public void giveKits() {
         for (Player player : getPlayers()){
             player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 5));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION, Integer.MAX_VALUE, 5));
         }
     }
 
@@ -47,9 +48,12 @@ public class SumoArena extends Arena {
 
     @Override
     public void end(PracticePlayer loser) {
+        loser.getPlayer().getWorld().strikeLightning(loser.getPlayer().getLocation());
         for (Player player : getPlayers()){
             player.removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
+            player.removePotionEffect(PotionEffectType.SATURATION);
         }
+
         super.end(loser);
     }
 }

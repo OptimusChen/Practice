@@ -1,5 +1,6 @@
 package com.optimus.practice.inventory;
 
+import com.optimus.practice.util.ItemCreator;
 import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftInventoryCustom;
 import org.bukkit.entity.HumanEntity;
@@ -25,6 +26,16 @@ public abstract class PracticeInventory {
     public void fill(ItemStack item){
         for(int i = 0; i < inventory.getSize(); i++){
             inventory.setItem(i, item);
+        }
+    }
+
+    public void outline(ItemStack item){
+        for (int i = 0; i < inventory.getSize(); i++){
+            inventory.setItem(i, item);
+        }
+
+        for (int i = 10; i < inventory.getSize() - 10; i++){
+            inventory.setItem(i, null);
         }
     }
 

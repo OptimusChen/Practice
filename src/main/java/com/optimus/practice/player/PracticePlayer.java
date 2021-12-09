@@ -1,5 +1,6 @@
 package com.optimus.practice.player;
 
+import com.optimus.practice.leaderboard.GlobalRanking;
 import com.optimus.practice.wand.Wand;
 import com.optimus.practice.scoreboard.Scoreboard;
 import com.optimus.practice.scoreboard.ScoreboardState;
@@ -22,7 +23,7 @@ public class PracticePlayer {
     private int wins;
     private int losses;
     private int points;
-    private int globalRanking;
+    private GlobalRanking globalRanking;
     private Scoreboard board;
     private Player player;
     private ArrayList<Location> wandLocs;
@@ -36,7 +37,6 @@ public class PracticePlayer {
         this.wins = 0;
         this.losses = 0;
         this.points = 0;
-        this.globalRanking = 0;
         this.player = player;
         this.wandLocs = new ArrayList<>();
         this.spawnLocations = new ArrayList<>();
@@ -44,6 +44,7 @@ public class PracticePlayer {
         this.opponent = null;
         this.inventory = new HashMap<>();
         this.armor = new HashMap<>();
+        this.globalRanking = new GlobalRanking(this);
     }
 
     public void init(){
@@ -55,12 +56,10 @@ public class PracticePlayer {
         }catch (NullPointerException e){
 
         }
-
-        //player.getInventory().setItem(0, ItemCreator.createInventoryItem());
     }
 
     public int getGlobalRanking(){
-        return globalRanking;
+        return globalRanking.getRank();
     }
 
     public void update() {
