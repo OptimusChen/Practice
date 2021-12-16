@@ -21,7 +21,7 @@ import java.util.UUID;
 
 public class ArenaConfig {
 
-    private static Practice practice = Practice.getInstance();
+    private static final Practice practice = Practice.getInstance();
 
     public static void init() {
         File folder = new File(practice.getDataFolder() + File.separator + "Arenas");

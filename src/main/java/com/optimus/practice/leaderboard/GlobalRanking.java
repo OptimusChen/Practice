@@ -13,8 +13,8 @@ import java.util.Objects;
 
 public class GlobalRanking {
 
-    private Practice practice = Practice.getInstance();
-    private PracticePlayer practicePlayer;
+    private final Practice practice = Practice.getInstance();
+    private final PracticePlayer practicePlayer;
 
     public GlobalRanking(PracticePlayer player) {
         this.practicePlayer = player;

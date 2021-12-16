@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public class PracticePlayerManager {
 
-    private static HashMap<UUID, PracticePlayer> players = new HashMap();
+    private static final HashMap<UUID, PracticePlayer> players = new HashMap();
 
     public static PracticePlayer getPlayer(Player player) {
         return players.get(player.getUniqueId());

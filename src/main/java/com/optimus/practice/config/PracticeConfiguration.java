@@ -15,7 +15,7 @@ public class PracticeConfiguration {
 
     public static String LOBBYLOCATION = "LobbyLocation";
     public static String LOBBYITEMS = "LobbyItems";
-    private Practice practice = Practice.getInstance();
+    private final Practice practice = Practice.getInstance();
     private FileConfiguration config;
     private File file;
 

@@ -10,9 +10,9 @@ import org.bukkit.entity.Player;
 @Getter
 public abstract class PracticeCommand implements CommandExecutor {
 
-    private String name;
-    private String permission;
-    private boolean requiresPlayer;
+    private final String name;
+    private final String permission;
+    private final boolean requiresPlayer;
 
     public PracticeCommand(String name, String permission, boolean requiresPlayer) {
         this.permission = permission;

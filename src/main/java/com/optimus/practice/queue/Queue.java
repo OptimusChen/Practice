@@ -13,7 +13,7 @@ import java.util.UUID;
 
 public abstract class Queue {
 
-    private HashMap<ArenaType, ArrayList<PracticePlayer>> players;
+    private final HashMap<ArenaType, ArrayList<PracticePlayer>> players;
 
     public Queue() {
         players = new HashMap<>();

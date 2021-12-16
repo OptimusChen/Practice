@@ -11,8 +11,8 @@ import org.bukkit.inventory.ItemStack;
 public class Wand {
 
     public static Material wandMaterial = Material.CARROT_STICK;
-    private ItemStack wand;
-    private PracticePlayer player;
+    private final ItemStack wand;
+    private final PracticePlayer player;
 
     public Wand(PracticePlayer player) {
         this.player = player;

@@ -18,7 +18,7 @@ import java.util.HashMap;
 
 public class BoxingArena extends Arena {
 
-    private HashMap<Player, Integer> combo;
+    private final HashMap<Player, Integer> combo;
 
     public BoxingArena(ArenaConfiguration config) {
         super(config);

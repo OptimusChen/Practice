@@ -11,7 +11,7 @@ import java.io.IOException;
 public class PlayerConfiguration {
 
     private FileConfiguration config;
-    private File file;
+    private final File file;
 
     public PlayerConfiguration(File file, FileConfiguration config) {
         this.file = file;

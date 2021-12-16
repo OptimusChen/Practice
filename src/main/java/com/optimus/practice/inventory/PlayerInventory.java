@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class PlayerInventory extends PracticeInventory implements Listener {
 
-    private Player player;
+    private final Player player;
 
     public PlayerInventory(Player player) {
         super(false);

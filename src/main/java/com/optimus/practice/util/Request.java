@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Request {
 
-    private static ArrayList<String> activeRequests = new ArrayList<>();
+    private static final ArrayList<String> activeRequests = new ArrayList<>();
 
     public static boolean isValid(String s) {
         return activeRequests.contains(s);

@@ -11,8 +11,8 @@ import java.util.List;
 @Getter
 public class PvPArena extends Arena {
 
-    private List<ItemStack> items;
-    private List<ItemStack> armor;
+    private final List<ItemStack> items;
+    private final List<ItemStack> armor;
 
     public PvPArena(ArenaConfiguration config, List<ItemStack> items, List<ItemStack> armor) {
         super(config);

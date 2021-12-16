@@ -31,14 +31,14 @@ import java.util.List;
 @Getter
 public abstract class Arena implements Listener {
 
-    private ArrayList<Location> spawns;
-    private int playerAmount;
-    private ArenaConfiguration config;
-    private String internalID;
-    private String name;
+    private final ArrayList<Location> spawns;
+    private final int playerAmount;
+    private final ArenaConfiguration config;
+    private final String internalID;
+    private final String name;
     private boolean active;
-    private ArrayList<Player> players;
-    private ArrayList<Location> corners;
+    private final ArrayList<Player> players;
+    private final ArrayList<Location> corners;
     private boolean finishedCountdown;
 
     public Arena(ArenaConfiguration config) {

@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class PlayerConfig {
 
-    private static Practice practice = Practice.getInstance();
+    private static final Practice practice = Practice.getInstance();
 
     public static void createPlayerFile(Player player) {
         File folder = new File(practice.getDataFolder() + File.separator + "Players");
