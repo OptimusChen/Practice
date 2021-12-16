@@ -54,7 +54,7 @@ public class PracticePlayer {
             wins = (int) config.getValue("Wins");
             losses = (int) config.getValue("Losses");
             points = (int) config.getValue("Points");
-        } catch (NullPointerException e) {
+        } catch (NullPointerException ignored) {
 
         }
     }
@@ -69,7 +69,7 @@ public class PracticePlayer {
             wins = (int) config.getValue("Wins");
             losses = (int) config.getValue("Losses");
             points = (int) config.getValue("Points");
-        } catch (NullPointerException e) {
+        } catch (NullPointerException ignored) {
         }
         board.updateScoreboard();
     }
