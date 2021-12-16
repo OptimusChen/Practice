@@ -30,6 +30,7 @@ public class QueueCommand extends PracticeCommand {
                 for (Map.Entry<UUID, Arena> entry : Practice.getArenaManager().getRegistered().entrySet()) {
                     if (entry.getValue().getName().equalsIgnoreCase(type.name())) {
                         found = true;
+                        break;
                     }
                 }
 
