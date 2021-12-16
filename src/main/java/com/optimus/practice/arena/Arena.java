@@ -36,9 +36,9 @@ public abstract class Arena implements Listener {
     private final ArenaConfiguration config;
     private final String internalID;
     private final String name;
-    private boolean active;
     private final ArrayList<Player> players;
     private final ArrayList<Location> corners;
+    private boolean active;
     private boolean finishedCountdown;
 
     public Arena(ArenaConfiguration config) {

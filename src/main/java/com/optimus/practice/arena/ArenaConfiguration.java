@@ -9,8 +9,8 @@ import java.io.IOException;
 @Getter
 public class ArenaConfiguration {
 
-    private YamlConfiguration configuration;
     private final File file;
+    private YamlConfiguration configuration;
 
     public ArenaConfiguration(File file) {
         this.file = file;

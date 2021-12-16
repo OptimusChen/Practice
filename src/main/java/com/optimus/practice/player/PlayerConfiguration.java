@@ -10,8 +10,8 @@ import java.io.IOException;
 @Getter
 public class PlayerConfiguration {
 
-    private FileConfiguration config;
     private final File file;
+    private FileConfiguration config;
 
     public PlayerConfiguration(File file, FileConfiguration config) {
         this.file = file;
