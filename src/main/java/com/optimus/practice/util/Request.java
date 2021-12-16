@@ -21,7 +21,7 @@ public class Request {
             public void run() {
                 activeRequests.remove(s);
             }
-        }.runTaskLater(Practice.getInstance(), 20 * expiry);
+        }.runTaskLater(Practice.getInstance(), 20L * expiry);
     }
 
 }
