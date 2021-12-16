@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 @Getter
 public class Wand {
 
-    public static Material wandMaterial = Material.CARROT_STICK;
+    public static final Material wandMaterial = Material.CARROT_STICK;
     private final ItemStack wand;
     private final PracticePlayer player;
 

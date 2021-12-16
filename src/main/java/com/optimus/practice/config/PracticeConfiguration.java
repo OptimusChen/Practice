@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class PracticeConfiguration {
 
-    public static String LOBBYLOCATION = "LobbyLocation";
+    public static final String LOBBYLOCATION = "LobbyLocation";
     public static String LOBBYITEMS = "LobbyItems";
     private final Practice practice = Practice.getInstance();
     private FileConfiguration config;
