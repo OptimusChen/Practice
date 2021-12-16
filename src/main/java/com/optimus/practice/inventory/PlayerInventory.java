@@ -4,7 +4,6 @@ import com.optimus.practice.Practice;
 import com.optimus.practice.player.PracticePlayer;
 import com.optimus.practice.player.PracticePlayerManager;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
@@ -20,7 +19,7 @@ public class PlayerInventory extends PracticeInventory implements Listener {
 
     private Player player;
 
-    public PlayerInventory(Player player){
+    public PlayerInventory(Player player) {
         super(false);
         this.player = player;
         init();
@@ -34,7 +33,7 @@ public class PlayerInventory extends PracticeInventory implements Listener {
         HashMap<Integer, ItemStack> armor = practicePlayer.getArmor();
         HashMap<Integer, ItemStack> inv = practicePlayer.getInventory();
 
-        for (Map.Entry<Integer, ItemStack> entry : inv.entrySet()){
+        for (Map.Entry<Integer, ItemStack> entry : inv.entrySet()) {
             inventory.setItem(entry.getKey(), entry.getValue());
         }
 
@@ -47,15 +46,15 @@ public class PlayerInventory extends PracticeInventory implements Listener {
     }
 
     @EventHandler
-    public void onClick(InventoryClickEvent e){
-        if (e.getInventory().equals(inventory)){
+    public void onClick(InventoryClickEvent e) {
+        if (e.getInventory().equals(inventory)) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler
-    public void onClose(InventoryCloseEvent e){
-        if (e.getInventory().equals(inventory)){
+    public void onClose(InventoryCloseEvent e) {
+        if (e.getInventory().equals(inventory)) {
             HandlerList.unregisterAll(this);
         }
     }

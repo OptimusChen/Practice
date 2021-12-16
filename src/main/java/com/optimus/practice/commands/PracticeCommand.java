@@ -1,6 +1,5 @@
 package com.optimus.practice.commands;
 
-import com.optimus.practice.Practice;
 import lombok.Getter;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -15,7 +14,7 @@ public abstract class PracticeCommand implements CommandExecutor {
     private String permission;
     private boolean requiresPlayer;
 
-    public PracticeCommand(String name, String permission, boolean requiresPlayer){
+    public PracticeCommand(String name, String permission, boolean requiresPlayer) {
         this.permission = permission;
         this.requiresPlayer = requiresPlayer;
         this.name = name;
@@ -23,15 +22,15 @@ public abstract class PracticeCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if (!commandSender.hasPermission(permission)){
+        if (!commandSender.hasPermission(permission)) {
             commandSender.sendMessage(ChatColor.RED + "No Permission!");
             return true;
         }
 
-        if (requiresPlayer){
-            if (commandSender instanceof Player){
+        if (requiresPlayer) {
+            if (commandSender instanceof Player) {
                 execute((Player) commandSender, strings);
-            }else{
+            } else {
                 commandSender.sendMessage(ChatColor.RED + "Only players can run this command!");
             }
         }
@@ -40,6 +39,9 @@ public abstract class PracticeCommand implements CommandExecutor {
         return false;
     }
 
-    public void execute(Player player, String[] args){}
-    public void execute(CommandSender sender, String[] args){}
+    public void execute(Player player, String[] args) {
+    }
+
+    public void execute(CommandSender sender, String[] args) {
+    }
 }

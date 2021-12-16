@@ -15,14 +15,14 @@ public class PlayerConfig {
 
     private static Practice practice = Practice.getInstance();
 
-    public static void createPlayerFile(Player player){
+    public static void createPlayerFile(Player player) {
         File folder = new File(practice.getDataFolder() + File.separator + "Players");
         if (!folder.exists()) {
             folder.mkdirs();
         }
         File playerFile = new File(practice.getDataFolder() + File.separator + "Players" + File.separator + Bukkit.getPlayer(player.getName()).getUniqueId() + ".yml");
         if (!playerFile.exists()) {
-            try{
+            try {
                 playerFile.createNewFile();
                 FileConfiguration config = YamlConfiguration.loadConfiguration(playerFile);
 
@@ -32,7 +32,7 @@ public class PlayerConfig {
 
                 config.save(playerFile);
 
-            }catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }

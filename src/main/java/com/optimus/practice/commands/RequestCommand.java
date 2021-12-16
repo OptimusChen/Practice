@@ -18,21 +18,21 @@ public class RequestCommand extends PracticeCommand {
     public void execute(Player player, String[] args) {
         super.execute(player, args);
 
-        if (args.length == 2){
-            if (args[0].equalsIgnoreCase("inventory")){
+        if (args.length == 2) {
+            if (args[0].equalsIgnoreCase("inventory")) {
                 String requestToken = args[1];
-                if (Request.isValid(requestToken)){
+                if (Request.isValid(requestToken)) {
                     Player inventoryPlayer = Bukkit.getPlayer(UUID.fromString(requestToken));
-                    if (inventoryPlayer.isOnline()){
+                    if (inventoryPlayer.isOnline()) {
                         PlayerInventory playerInventory = new PlayerInventory(inventoryPlayer);
                         playerInventory.open(player);
-                    }else{
+                    } else {
                         player.sendMessage(ChatColor.RED + "Player has disconnected!");
                     }
-                }else{
+                } else {
                     player.sendMessage(ChatColor.RED + "Invalid Inventory! Expired Token?");
                 }
-            }else{
+            } else {
                 player.sendMessage(ChatColor.RED + "Invalid argument!");
             }
         }

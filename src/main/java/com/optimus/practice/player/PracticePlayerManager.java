@@ -9,19 +9,19 @@ public class PracticePlayerManager {
 
     private static HashMap<UUID, PracticePlayer> players = new HashMap();
 
-    public static PracticePlayer getPlayer(Player player){
+    public static PracticePlayer getPlayer(Player player) {
         return players.get(player.getUniqueId());
     }
 
-    public static void registerPlayer(Player player){
+    public static void registerPlayer(Player player) {
         players.put(player.getUniqueId(), new PracticePlayer(player));
     }
 
-    public static HashMap<UUID, PracticePlayer> getPlayers(){
+    public static HashMap<UUID, PracticePlayer> getPlayers() {
         return players;
     }
 
-    public static void unregisterPlayer(UUID uuid){
+    public static void unregisterPlayer(UUID uuid) {
         players.remove(uuid);
     }
 

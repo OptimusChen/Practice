@@ -28,7 +28,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class EventListener implements Listener {
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent e){
+    public void onJoin(PlayerJoinEvent e) {
         PracticePlayerManager.registerPlayer(e.getPlayer());
         PlayerConfig.createPlayerFile(e.getPlayer());
         Player player = e.getPlayer();
@@ -37,14 +37,14 @@ public class EventListener implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (practicePlayer.getPlayer().isOnline()){
+                if (practicePlayer.getPlayer().isOnline()) {
                     practicePlayer.update();
-                    if (practicePlayer.getScoreboardState().equals(ScoreboardState.LOBBY)){
+                    if (practicePlayer.getScoreboardState().equals(ScoreboardState.LOBBY)) {
                         practicePlayer.getPlayer().setFoodLevel(20);
                         practicePlayer.getPlayer().setHealth(20.0f);
                         practicePlayer.getPlayer().getWorld().setGameRuleValue("keepInventory", "true");
                     }
-                }else{
+                } else {
                     cancel();
                 }
             }
@@ -57,25 +57,25 @@ public class EventListener implements Listener {
     }
 
     @EventHandler
-    public void onLeave(PlayerQuitEvent e){
+    public void onLeave(PlayerQuitEvent e) {
         PracticePlayerManager.unregisterPlayer(e.getPlayer().getUniqueId());
     }
 
     @EventHandler
-    public void onInteract(PlayerInteractEvent e){
+    public void onInteract(PlayerInteractEvent e) {
         Player player = e.getPlayer();
         ItemStack item = player.getItemInHand();
-        if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) || e.getAction().equals(Action.RIGHT_CLICK_AIR)){
-            if (item != null){
-                if (item.getItemMeta() != null){
-                    if (item.getItemMeta().hasDisplayName()){
-                        if (ChatColor.stripColor(item.getItemMeta().getDisplayName()).equalsIgnoreCase("Unranked Practice (Right Click)")){
-                            if (item.getType().equals(Material.IRON_SWORD)){
+        if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) || e.getAction().equals(Action.RIGHT_CLICK_AIR)) {
+            if (item != null) {
+                if (item.getItemMeta() != null) {
+                    if (item.getItemMeta().hasDisplayName()) {
+                        if (ChatColor.stripColor(item.getItemMeta().getDisplayName()).equalsIgnoreCase("Unranked Practice (Right Click)")) {
+                            if (item.getType().equals(Material.IRON_SWORD)) {
                                 new UnrankedQueueInventory().open(player);
                             }
-                        }else if (ChatColor.stripColor(item.getItemMeta().getDisplayName()).equalsIgnoreCase("Ranked Practice (Right Click)")){
-                            if (item.getType().equals(Material.DIAMOND_SWORD)){
-                            new RankedQueueInventory().open(player);
+                        } else if (ChatColor.stripColor(item.getItemMeta().getDisplayName()).equalsIgnoreCase("Ranked Practice (Right Click)")) {
+                            if (item.getType().equals(Material.DIAMOND_SWORD)) {
+                                new RankedQueueInventory().open(player);
                             }
                         }
                     }
@@ -85,30 +85,30 @@ public class EventListener implements Listener {
     }
 
     @EventHandler
-    public void onClick(InventoryClickEvent e){
+    public void onClick(InventoryClickEvent e) {
         Player player = (Player) e.getWhoClicked();
-        if (ChatColor.stripColor(e.getView().getTitle()).equalsIgnoreCase("Unranked Queue")){
+        if (ChatColor.stripColor(e.getView().getTitle()).equalsIgnoreCase("Unranked Queue")) {
             e.setCancelled(true);
-            if (e.getSlot() == 13){
+            if (e.getSlot() == 13) {
                 UnrankedSelectModeInventory inv = new UnrankedSelectModeInventory();
                 inv.open(player);
             }
-        }else if (ChatColor.stripColor(e.getView().getTitle()).equalsIgnoreCase("Ranked Queue")){
+        } else if (ChatColor.stripColor(e.getView().getTitle()).equalsIgnoreCase("Ranked Queue")) {
             e.setCancelled(true);
-            if (e.getSlot() == 13){
+            if (e.getSlot() == 13) {
                 player.performCommand("queue join ranked");
                 player.closeInventory();
             }
-        }else if (ChatColor.stripColor(e.getView().getTitle()).equalsIgnoreCase("Solo Unranked Queue")){
+        } else if (ChatColor.stripColor(e.getView().getTitle()).equalsIgnoreCase("Solo Unranked Queue")) {
             e.setCancelled(true);
-            if (e.getCurrentItem() != null){
-                if (e.getCurrentItem().getType().equals(Material.DIAMOND_SWORD)){
+            if (e.getCurrentItem() != null) {
+                if (e.getCurrentItem().getType().equals(Material.DIAMOND_SWORD)) {
                     player.performCommand("queue join unranked nodebuff");
                     player.closeInventory();
-                }else if (e.getCurrentItem().getType().equals(Material.LEASH)){
+                } else if (e.getCurrentItem().getType().equals(Material.LEASH)) {
                     player.performCommand("queue join unranked sumo");
                     player.closeInventory();
-                }else if (e.getCurrentItem().getType().equals(Material.DIAMOND_CHESTPLATE)){
+                } else if (e.getCurrentItem().getType().equals(Material.DIAMOND_CHESTPLATE)) {
                     player.performCommand("queue join unranked boxing");
                     player.closeInventory();
                 }
@@ -117,11 +117,11 @@ public class EventListener implements Listener {
     }
 
     @EventHandler
-    public void onHunger(FoodLevelChangeEvent e){
-        if (e.getEntity() instanceof Player){
+    public void onHunger(FoodLevelChangeEvent e) {
+        if (e.getEntity() instanceof Player) {
             Player player = (Player) e.getEntity();
             PracticePlayer practicePlayer = PracticePlayerManager.getPlayer(player);
-            if (practicePlayer != null){
+            if (practicePlayer != null) {
                 if (practicePlayer.getScoreboardState().equals(ScoreboardState.LOBBY)) {
                     e.setCancelled(true);
                 }
@@ -130,8 +130,8 @@ public class EventListener implements Listener {
     }
 
     @EventHandler
-    public void onDamage(EntityDamageEvent e){
-        if (e.getEntity() instanceof Player){
+    public void onDamage(EntityDamageEvent e) {
+        if (e.getEntity() instanceof Player) {
             Player player = (Player) e.getEntity();
             PracticePlayer practicePlayer = PracticePlayerManager.getPlayer(player);
             if (practicePlayer.getScoreboardState().equals(ScoreboardState.LOBBY)) {
@@ -141,7 +141,7 @@ public class EventListener implements Listener {
     }
 
     @EventHandler
-    public void onSpawn(EntitySpawnEvent e){
+    public void onSpawn(EntitySpawnEvent e) {
         e.setCancelled(true);
     }
 

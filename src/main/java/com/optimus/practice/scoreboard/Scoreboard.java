@@ -15,10 +15,9 @@ import java.text.DecimalFormat;
 
 public class Scoreboard {
 
+    private final Player player;
     private org.bukkit.scoreboard.Scoreboard board;
     private Objective objective;
-
-    private final Player player;
 
     public Scoreboard(Player player) {
         board = Bukkit.getScoreboardManager().getNewScoreboard();
@@ -31,11 +30,11 @@ public class Scoreboard {
         updateScoreboard();
     }
 
-    private void initScoreboard(){
+    private void initScoreboard() {
         PracticePlayer practicePlayer = PracticePlayerManager.getPlayer(player);
         DecimalFormat formatter = new DecimalFormat("#,###");
         formatter.setGroupingUsed(true);
-        switch (practicePlayer.getScoreboardState()){
+        switch (practicePlayer.getScoreboardState()) {
             case LOBBY:
                 objective.setDisplayName(colorize("&d&lPractice"));
                 addLine(6, "&7------------------");
@@ -46,9 +45,9 @@ public class Scoreboard {
                 addLine(1, "&7-------------------");
                 break;
             case IN_GAME:
-                EntityPlayer entityPlayer = ((CraftPlayer)player).getHandle();
+                EntityPlayer entityPlayer = ((CraftPlayer) player).getHandle();
                 PracticePlayer opponent = practicePlayer.getOpponent();
-                EntityPlayer opponentPlayer = ((CraftPlayer)opponent.getPlayer()).getHandle();
+                EntityPlayer opponentPlayer = ((CraftPlayer) opponent.getPlayer()).getHandle();
                 objective.setDisplayName(colorize("&d&lPractice"));
                 addLine(6, "&7------------------");
                 addLine(5, "&fOpponent: &d" + practicePlayer.getOpponent().getPlayer().getName());
@@ -60,7 +59,7 @@ public class Scoreboard {
         }
     }
 
-    public void updateScoreboard(){
+    public void updateScoreboard() {
 
         this.board = Bukkit.getScoreboardManager().getNewScoreboard();
         Objective objective = board.registerNewObjective("PracticeBoard", "Display ");
@@ -72,12 +71,12 @@ public class Scoreboard {
     }
 
     // Yoinked from PluginUtils lol
-    public void addLine(int line, String text){
+    public void addLine(int line, String text) {
         Score score = objective.getScore(colorize(text));
         score.setScore(line);
     }
 
-    private String colorize(String s){
+    private String colorize(String s) {
         return ChatColor.translateAlternateColorCodes('&', s);
     }
 }

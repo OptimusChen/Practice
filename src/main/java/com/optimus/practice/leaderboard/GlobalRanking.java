@@ -7,10 +7,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Objects;
 
 public class GlobalRanking {
@@ -18,21 +16,21 @@ public class GlobalRanking {
     private Practice practice = Practice.getInstance();
     private PracticePlayer practicePlayer;
 
-    public GlobalRanking(PracticePlayer player){
+    public GlobalRanking(PracticePlayer player) {
         this.practicePlayer = player;
     }
 
-    public int getRank(){
+    public int getRank() {
         return calculate();
     }
 
-    private int calculate(){
+    private int calculate() {
         File folder = new File(practice.getDataFolder() + File.separator + "Players");
         if (!folder.exists()) {
             folder.mkdirs();
         }
 
-        if (folder.listFiles() != null){
+        if (folder.listFiles() != null) {
             ArrayList<Integer> list = new ArrayList<>();
 
             for (File file : Objects.requireNonNull(folder.listFiles())) {
@@ -46,8 +44,8 @@ public class GlobalRanking {
             ArrayUtils.reverse(array);
 
 
-            for (int j = 0; j < array.length; j++){
-                if (array[j] == practicePlayer.getPoints()){
+            for (int j = 0; j < array.length; j++) {
+                if (array[j] == practicePlayer.getPoints()) {
                     return j;
                 }
             }

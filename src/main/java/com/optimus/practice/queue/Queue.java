@@ -4,23 +4,24 @@ import com.optimus.practice.Practice;
 import com.optimus.practice.arena.Arena;
 import com.optimus.practice.arena.ArenaType;
 import com.optimus.practice.player.PracticePlayer;
-import com.optimus.practice.player.PracticePlayerManager;
-import com.optimus.practice.scoreboard.ScoreboardState;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public abstract class Queue {
 
     private HashMap<ArenaType, ArrayList<PracticePlayer>> players;
 
-    public Queue(){
+    public Queue() {
         players = new HashMap<>();
         init();
     }
 
-    private void init(){
-        for (ArenaType type : ArenaType.values()){
+    private void init() {
+        for (ArenaType type : ArenaType.values()) {
             players.put(type, new ArrayList<>());
         }
         new BukkitRunnable() {
@@ -31,39 +32,39 @@ public abstract class Queue {
         }.runTaskTimer(Practice.getInstance(), 5L, 40);
     }
 
-    public void join(PracticePlayer player, ArenaType type){
+    public void join(PracticePlayer player, ArenaType type) {
         ArrayList<PracticePlayer> list = players.get(type);
-        if (!list.contains(player)){
+        if (!list.contains(player)) {
             list.add(player);
         }
     }
 
     public void leave(PracticePlayer player) {
         for (Map.Entry<ArenaType, ArrayList<PracticePlayer>> entry : players.entrySet()) {
-            for (PracticePlayer practicePlayer : entry.getValue()){
-                if (practicePlayer.equals(player)){
+            for (PracticePlayer practicePlayer : entry.getValue()) {
+                if (practicePlayer.equals(player)) {
                     entry.getValue().remove(player);
                 }
             }
         }
     }
 
-    public int getAmount(ArenaType type){
+    public int getAmount(ArenaType type) {
         return players.get(type).size();
     }
 
-    public void update(){
+    public void update() {
         for (Map.Entry<ArenaType, ArrayList<PracticePlayer>> entry : players.entrySet()) {
             ArrayList<PracticePlayer> practicePlayers = entry.getValue();
             ArenaType type = entry.getKey();
-            if (practicePlayers.size() >= 2){
+            if (practicePlayers.size() >= 2) {
                 boolean hasStarted = false;
 
-                while (!hasStarted){
-                    for (Map.Entry<UUID, Arena> entry2 : Practice.getArenaManager().getRegistered().entrySet()){
+                while (!hasStarted) {
+                    for (Map.Entry<UUID, Arena> entry2 : Practice.getArenaManager().getRegistered().entrySet()) {
                         Arena arena = entry2.getValue();
-                        if (!arena.isActive()){
-                            if (arena.getName().equalsIgnoreCase(type.name())){
+                        if (!arena.isActive()) {
+                            if (arena.getName().equalsIgnoreCase(type.name())) {
                                 arena.start(practicePlayers.get(0).getPlayer(), practicePlayers.get(1).getPlayer());
                                 hasStarted = true;
                             }

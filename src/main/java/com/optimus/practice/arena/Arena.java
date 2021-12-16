@@ -7,6 +7,7 @@ import com.optimus.practice.player.PracticePlayerManager;
 import com.optimus.practice.scoreboard.ScoreboardState;
 import com.optimus.practice.util.ItemCreator;
 import com.optimus.practice.util.Request;
+import lombok.Getter;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -16,11 +17,6 @@ import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;
 import org.bukkit.*;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import lombok.Getter;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -28,6 +24,9 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 public abstract class Arena implements Listener {
@@ -42,7 +41,7 @@ public abstract class Arena implements Listener {
     private ArrayList<Location> corners;
     private boolean finishedCountdown;
 
-    public Arena(ArenaConfiguration config){
+    public Arena(ArenaConfiguration config) {
         this.config = config;
         this.playerAmount = 2;
         this.spawns = (ArrayList<Location>) config.getValue("spawns");
@@ -56,14 +55,14 @@ public abstract class Arena implements Listener {
 
     public abstract void giveKits();
 
-    public void start(Player player1, Player player2){
+    public void start(Player player1, Player player2) {
         players.add(player1);
         players.add(player2);
         active = true;
         finishedCountdown = false;
         player1.getInventory().clear();
         player2.getInventory().clear();
-        for (Player player : players){
+        for (Player player : players) {
             PracticePlayerManager.getPlayer(player).setScoreboardState(ScoreboardState.IN_GAME);
             player.setGameMode(GameMode.ADVENTURE);
             new BukkitRunnable() {
@@ -79,14 +78,14 @@ public abstract class Arena implements Listener {
                     player.sendMessage(ChatColor.GREEN + "Game Starts in 2....");
                     player.playSound(player.getLocation(), Sound.CHICKEN_EGG_POP, 10, 2);
                 }
-            }.runTaskLater(Practice.getInstance(), 2*20);
+            }.runTaskLater(Practice.getInstance(), 2 * 20);
             new BukkitRunnable() {
                 @Override
                 public void run() {
                     player.sendMessage(ChatColor.GREEN + "Game Starts in 1....");
                     player.playSound(player.getLocation(), Sound.CHICKEN_EGG_POP, 10, 2);
                 }
-            }.runTaskLater(Practice.getInstance(), 3*20);
+            }.runTaskLater(Practice.getInstance(), 3 * 20);
             new BukkitRunnable() {
                 @Override
                 public void run() {
@@ -94,20 +93,20 @@ public abstract class Arena implements Listener {
                     player.playSound(player.getLocation(), Sound.LEVEL_UP, 10, 2);
                     finishedCountdown = true;
                 }
-            }.runTaskLater(Practice.getInstance(), 4*20);
+            }.runTaskLater(Practice.getInstance(), 4 * 20);
         }
         giveKits();
         player1.teleport(spawns.get(0));
         player2.teleport(spawns.get(1));
     }
 
-    public void end(PracticePlayer loser){
+    public void end(PracticePlayer loser) {
 
         PracticePlayer winner;
 
         if (players.get(0).equals(loser.getPlayer())) {
             winner = PracticePlayerManager.getPlayer(players.get(1));
-        }else{
+        } else {
             winner = PracticePlayerManager.getPlayer(players.get(0));
         }
 
@@ -121,18 +120,18 @@ public abstract class Arena implements Listener {
         Request.addRequest(winner.getPlayer().getUniqueId().toString(), 60);
         Request.addRequest(loser.getPlayer().getUniqueId().toString(), 60);
 
-        for (PracticePlayer practicePlayer : practicePlayers){
+        for (PracticePlayer practicePlayer : practicePlayers) {
             practicePlayer.getInventory().clear();
 
-            for (int i = 0; i < 9; i++){
+            for (int i = 0; i < 9; i++) {
                 practicePlayer.getInventory().put(i, practicePlayer.getPlayer().getInventory().getContents()[i]);
             }
 
-            for (int i = practicePlayer.getPlayer().getInventory().getContents().length - 1; i > 0; i--){
+            for (int i = practicePlayer.getPlayer().getInventory().getContents().length - 1; i > 0; i--) {
                 practicePlayer.getInventory().put(i, practicePlayer.getPlayer().getInventory().getContents()[i]);
             }
 
-            for (int i = 0; i < practicePlayer.getPlayer().getInventory().getArmorContents().length; i++){
+            for (int i = 0; i < practicePlayer.getPlayer().getInventory().getArmorContents().length; i++) {
                 practicePlayer.getArmor().put(i, practicePlayer.getPlayer().getInventory().getArmorContents()[i]);
             }
 
@@ -171,16 +170,16 @@ public abstract class Arena implements Listener {
             practicePlayer.sendMessage(messageWinner);
 
             practicePlayer.getPlayer().playSound(practicePlayer.getPlayer().getLocation(), Sound.FIREWORK_LAUNCH, 10, 1);
-            for (int i = 0; i < 20; i++){
+            for (int i = 0; i < 20; i++) {
                 new BukkitRunnable() {
                     @Override
                     public void run() {
-                        if (practicePlayer.getPlayer().isOnline()){
+                        if (practicePlayer.getPlayer().isOnline()) {
                             practicePlayer.getPlayer().playSound(practicePlayer.getPlayer().getLocation(), Sound.FIREWORK_LAUNCH, 10, 1);
 
                         }
                     }
-                }.runTaskLater(Practice.getInstance(), i*10);
+                }.runTaskLater(Practice.getInstance(), i * 10);
             }
         }
 
@@ -206,7 +205,7 @@ public abstract class Arena implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
-                for (PracticePlayer pplayer : practicePlayers){
+                for (PracticePlayer pplayer : practicePlayers) {
                     if (pplayer.getPlayer().isOnline()) {
                         Player player = pplayer.getPlayer();
                         player.teleport((Location) Practice.getConfiguration().getValue(PracticeConfiguration.LOBBYLOCATION));
@@ -226,16 +225,16 @@ public abstract class Arena implements Listener {
                     active = false;
                 }
             }
-        }.runTaskLater(Practice.getInstance(), 10*20);
+        }.runTaskLater(Practice.getInstance(), 10 * 20);
 
     }
 
     @EventHandler
-    public void onDamage(EntityDamageEvent e){
-        if (e.getEntity() instanceof Player){
+    public void onDamage(EntityDamageEvent e) {
+        if (e.getEntity() instanceof Player) {
             Player player = (Player) e.getEntity();
-            if (players.contains(player)){
-                if (player.getHealth() - e.getFinalDamage() <= 0){
+            if (players.contains(player)) {
+                if (player.getHealth() - e.getFinalDamage() <= 0) {
                     end(PracticePlayerManager.getPlayer(player));
                     player.setHealth(20.0f);
                 }
@@ -244,10 +243,10 @@ public abstract class Arena implements Listener {
     }
 
     @EventHandler
-    public void onMove(PlayerMoveEvent e){
-        if (players.contains(e.getPlayer())){
-            if (!finishedCountdown){
-                 e.setCancelled(true);
+    public void onMove(PlayerMoveEvent e) {
+        if (players.contains(e.getPlayer())) {
+            if (!finishedCountdown) {
+                e.setCancelled(true);
             }
         }
     }

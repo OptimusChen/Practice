@@ -13,42 +13,41 @@ import java.util.ArrayList;
 
 public class PracticeConfiguration {
 
+    public static String LOBBYLOCATION = "LobbyLocation";
+    public static String LOBBYITEMS = "LobbyItems";
     private Practice practice = Practice.getInstance();
     private FileConfiguration config;
     private File file;
 
-    public static String LOBBYLOCATION = "LobbyLocation";
-    public static String LOBBYITEMS = "LobbyItems";
-
-    public PracticeConfiguration(){
+    public PracticeConfiguration() {
         init();
     }
 
-    private void init(){
+    private void init() {
         Bukkit.getLogger().info("test0");
         createConfig();
     }
 
-    public Object getValue(String path){
+    public Object getValue(String path) {
         return config.get(path);
     }
 
-    public void setValue(String path, Object item){
+    public void setValue(String path, Object item) {
         try {
             config.set(path, item);
             config.save(file);
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void createConfig(){
+    private void createConfig() {
         Bukkit.getLogger().info("test1");
         File file = new File(practice.getDataFolder() + File.separator + "config.yml");
         Bukkit.getLogger().info("test2");
         if (!file.exists()) {
             Bukkit.getLogger().info("test3");
-            try{
+            try {
                 Bukkit.getLogger().info("test4");
                 file.createNewFile();
                 FileConfiguration config = YamlConfiguration.loadConfiguration(file);
@@ -61,7 +60,7 @@ public class PracticeConfiguration {
                 config.save(file);
 
                 Bukkit.getLogger().info("test7");
-            }catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }

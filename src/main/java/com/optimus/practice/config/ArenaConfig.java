@@ -7,14 +7,10 @@ import com.optimus.practice.arena.ArenaType;
 import com.optimus.practice.arena.arenas.BoxingArena;
 import com.optimus.practice.arena.arenas.PvPArena;
 import com.optimus.practice.arena.arenas.SumoArena;
-import com.optimus.practice.player.PlayerConfiguration;
-import com.optimus.practice.player.PracticePlayerManager;
 import com.optimus.practice.util.KitCreator;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
@@ -27,12 +23,12 @@ public class ArenaConfig {
 
     private static Practice practice = Practice.getInstance();
 
-    public static void init(){
+    public static void init() {
         File folder = new File(practice.getDataFolder() + File.separator + "Arenas");
         if (!folder.exists()) {
             folder.mkdirs();
         }
-        for (File file : Objects.requireNonNull(folder.listFiles())){
+        for (File file : Objects.requireNonNull(folder.listFiles())) {
             FileConfiguration arenaFileConfig = YamlConfiguration.loadConfiguration(file);
             ArenaConfiguration config = new ArenaConfiguration(file);
             ArenaType type = ArenaType.valueOf(arenaFileConfig.getString("name"));
@@ -57,7 +53,7 @@ public class ArenaConfig {
         }
     }
 
-    public static Arena createArenaConfig(ArenaType type, ArrayList<Location> spawns, ArrayList<Location> corners){
+    public static Arena createArenaConfig(ArenaType type, ArrayList<Location> spawns, ArrayList<Location> corners) {
         File folder = new File(practice.getDataFolder() + File.separator + "Arenas");
         UUID uuid = UUID.randomUUID();
         if (!folder.exists()) {
@@ -65,7 +61,7 @@ public class ArenaConfig {
         }
         File playerFile = new File(practice.getDataFolder() + File.separator + "Arenas" + File.separator + type.name() + "_" + uuid + ".yml");
         if (!playerFile.exists()) {
-            try{
+            try {
                 playerFile.createNewFile();
                 FileConfiguration config = YamlConfiguration.loadConfiguration(playerFile);
 
@@ -78,7 +74,7 @@ public class ArenaConfig {
 
                 config.save(playerFile);
 
-            }catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }

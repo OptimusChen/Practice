@@ -3,7 +3,6 @@ package com.optimus.practice.util;
 import com.optimus.practice.arena.ArenaType;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionType;
@@ -13,9 +12,9 @@ import java.util.List;
 
 public class KitCreator {
 
-    public static List<ItemStack> createKit(ArenaType type){
+    public static List<ItemStack> createKit(ArenaType type) {
         List<ItemStack> list = new ArrayList<>();
-        switch (type){
+        switch (type) {
             case NODEBUFF:
                 list.add(ItemCreator.addEnchs(new ItemStack(Material.DIAMOND_SWORD), Enchantment.FIRE_ASPECT, 2, Enchantment.DAMAGE_ALL, 3, Enchantment.DURABILITY, 3));
                 Potion fireRes = Potion.fromItemStack(new ItemStack(Material.POTION));
@@ -35,7 +34,7 @@ public class KitCreator {
                 list.add(new ItemStack(Material.ENDER_PEARL, 16));
                 list.add(new ItemStack(Material.COOKED_BEEF, 64));
 
-                for (int i = 0; i < 29; i++){
+                for (int i = 0; i < 29; i++) {
                     Potion potion = Potion.fromItemStack(new ItemStack(Material.POTION));
                     potion.setSplash(true);
                     potion.setType(PotionType.INSTANT_HEAL);
@@ -51,7 +50,7 @@ public class KitCreator {
 
     public static List<ItemStack> createArmor(ArenaType type) {
         List<ItemStack> list = new ArrayList<>();
-        switch (type){
+        switch (type) {
             case NODEBUFF:
                 list.add(ItemCreator.addEnchs(new ItemStack(Material.DIAMOND_HELMET), Enchantment.PROTECTION_ENVIRONMENTAL, 2, Enchantment.DURABILITY, 3, null, 0));
                 list.add(ItemCreator.addEnchs(new ItemStack(Material.DIAMOND_CHESTPLATE), Enchantment.PROTECTION_ENVIRONMENTAL, 2, Enchantment.DURABILITY, 3, null, 0));

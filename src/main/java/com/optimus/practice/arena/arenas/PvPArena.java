@@ -3,15 +3,10 @@ package com.optimus.practice.arena.arenas;
 import com.optimus.practice.arena.Arena;
 import com.optimus.practice.arena.ArenaConfiguration;
 import lombok.Getter;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftItem;
-import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.material.MaterialData;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Getter
 public class PvPArena extends Arena {
@@ -27,20 +22,20 @@ public class PvPArena extends Arena {
 
     @Override
     public void giveKits() {
-        for (Player player : getPlayers()){
-            for (ItemStack item : items){
+        for (Player player : getPlayers()) {
+            for (ItemStack item : items) {
                 player.getInventory().addItem(item);
             }
 
-            for (ItemStack armorItem : armor){
+            for (ItemStack armorItem : armor) {
                 String typeNameString = armorItem.getType().name();
-                if (typeNameString.endsWith("_HELMET")){
+                if (typeNameString.endsWith("_HELMET")) {
                     player.getInventory().setHelmet(armorItem);
-                }else if (typeNameString.endsWith("_CHESTPLATE")){
+                } else if (typeNameString.endsWith("_CHESTPLATE")) {
                     player.getInventory().setChestplate(armorItem);
-                }else if (typeNameString.endsWith("_LEGGINGS")){
+                } else if (typeNameString.endsWith("_LEGGINGS")) {
                     player.getInventory().setLeggings(armorItem);
-                }else if (typeNameString.endsWith("_BOOTS")){
+                } else if (typeNameString.endsWith("_BOOTS")) {
                     player.getInventory().setBoots(armorItem);
                 }
             }

@@ -41,10 +41,10 @@ public class WorldManager {
     }
 
     private static void delete(File file) {
-        if(file.isDirectory()){
+        if (file.isDirectory()) {
             File[] files = file.listFiles();
-            if(files == null) return;
-            for(File child : files) {
+            if (files == null) return;
+            for (File child : files) {
                 delete(child);
             }
         }

@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ItemCreator {
 
-    public static ItemStack createEmptySpace(){
+    public static ItemStack createEmptySpace() {
         ItemStack item = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 15);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(" ");
@@ -21,7 +21,7 @@ public class ItemCreator {
         return item;
     }
 
-    public static ItemStack createExitBarrier(){
+    public static ItemStack createExitBarrier() {
         ItemStack item = new ItemStack(Material.BARRIER);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(ChatColor.RED + "Close");
@@ -33,16 +33,16 @@ public class ItemCreator {
         ItemStack item = new ItemStack(mat, amount);
         ItemMeta meta = item.getItemMeta();
         List<String> lore = new ArrayList<>();
-        item.setDurability((short)id);
+        item.setDurability((short) id);
         meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', name));
-        for (String s : strings){
+        for (String s : strings) {
             lore.add(ChatColor.translateAlternateColorCodes('&', s));
         }
-        if (hideFlags){
+        if (hideFlags) {
             meta.addItemFlags(ItemFlag.values());
             meta.spigot().setUnbreakable(true);
         }
-        if (glow){
+        if (glow) {
             meta.addEnchant(Enchantment.LURE, 1, true);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
@@ -51,7 +51,7 @@ public class ItemCreator {
         return item;
     }
 
-    public static ItemStack createWand(){
+    public static ItemStack createWand() {
         ItemStack item = new ItemStack(Wand.wandMaterial);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Practice Wand");
@@ -59,14 +59,14 @@ public class ItemCreator {
         return item;
     }
 
-    public static ItemStack addEnchs(ItemStack item, Enchantment enchantment, int level, Enchantment enchantment2, int level2, Enchantment enchantment3, int level3){
+    public static ItemStack addEnchs(ItemStack item, Enchantment enchantment, int level, Enchantment enchantment2, int level2, Enchantment enchantment3, int level3) {
         if (enchantment != null) {
             item.addEnchantment(enchantment, level);
         }
         if (enchantment2 != null) {
             item.addEnchantment(enchantment2, level2);
         }
-        if (enchantment3 != null){
+        if (enchantment3 != null) {
             item.addEnchantment(enchantment3, level3);
         }
         return item;

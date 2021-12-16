@@ -1,21 +1,22 @@
 package com.optimus.practice.player;
 
 import com.optimus.practice.leaderboard.GlobalRanking;
-import com.optimus.practice.wand.Wand;
 import com.optimus.practice.scoreboard.Scoreboard;
 import com.optimus.practice.scoreboard.ScoreboardState;
+import com.optimus.practice.wand.Wand;
+import lombok.Getter;
 import lombok.Setter;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import lombok.Getter;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-@Getter @Setter
+@Getter
+@Setter
 public class PracticePlayer {
 
     public PlayerConfiguration config;
@@ -33,7 +34,7 @@ public class PracticePlayer {
     private HashMap<Integer, ItemStack> inventory;
     private HashMap<Integer, ItemStack> armor;
 
-    public PracticePlayer(Player player){
+    public PracticePlayer(Player player) {
         this.wins = 0;
         this.losses = 0;
         this.points = 0;
@@ -47,18 +48,18 @@ public class PracticePlayer {
         this.globalRanking = new GlobalRanking(this);
     }
 
-    public void init(){
+    public void init() {
         this.board = new Scoreboard(player);
         try {
             wins = (int) config.getValue("Wins");
             losses = (int) config.getValue("Losses");
             points = (int) config.getValue("Points");
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
 
         }
     }
 
-    public int getGlobalRanking(){
+    public int getGlobalRanking() {
         return globalRanking.getRank();
     }
 
@@ -68,24 +69,24 @@ public class PracticePlayer {
             wins = (int) config.getValue("Wins");
             losses = (int) config.getValue("Losses");
             points = (int) config.getValue("Points");
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
         }
         board.updateScoreboard();
     }
 
     public void setSpawnLocations(Location loc, int index) {
-        if (index == 1){
-            if (spawnLocations.size() == 0){
+        if (index == 1) {
+            if (spawnLocations.size() == 0) {
                 spawnLocations.add(loc);
-            }else{
+            } else {
                 spawnLocations.set(0, loc);
             }
-        }else{
-            if (spawnLocations.size() == 0){
+        } else {
+            if (spawnLocations.size() == 0) {
 
-            } else if (spawnLocations.size() == 1){
+            } else if (spawnLocations.size() == 1) {
                 spawnLocations.add(loc);
-            }else{
+            } else {
                 spawnLocations.set(1, loc);
             }
         }
@@ -109,10 +110,10 @@ public class PracticePlayer {
         }
     }
 
-    public void sendMessage(Object message){
-        if (message instanceof String){
+    public void sendMessage(Object message) {
+        if (message instanceof String) {
             getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', message.toString()));
-        }else if (message instanceof TextComponent){
+        } else if (message instanceof TextComponent) {
             getPlayer().spigot().sendMessage((TextComponent) message);
         }
     }

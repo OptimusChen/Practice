@@ -12,16 +12,15 @@ import org.bukkit.event.player.PlayerInteractEvent;
 public class WandListener implements Listener {
 
 
-
     @EventHandler
-    public void onBreak(BlockBreakEvent e){
-        if (e.getPlayer().getItemInHand() != null){
-            if (e.getPlayer().getItemInHand().getItemMeta() != null){
-                if (e.getPlayer().getItemInHand().getItemMeta().hasDisplayName()){
-                    if (ChatColor.stripColor(e.getPlayer().getItemInHand().getItemMeta().getDisplayName()).equalsIgnoreCase("practice wand")){
+    public void onBreak(BlockBreakEvent e) {
+        if (e.getPlayer().getItemInHand() != null) {
+            if (e.getPlayer().getItemInHand().getItemMeta() != null) {
+                if (e.getPlayer().getItemInHand().getItemMeta().hasDisplayName()) {
+                    if (ChatColor.stripColor(e.getPlayer().getItemInHand().getItemMeta().getDisplayName()).equalsIgnoreCase("practice wand")) {
                         e.setCancelled(true);
                         PracticePlayer practicePlayer = PracticePlayerManager.getPlayer(e.getPlayer());
-                        if (practicePlayer.getWand() == null){
+                        if (practicePlayer.getWand() == null) {
                             e.getPlayer().sendMessage(ChatColor.RED + "Error! Invalid Wand! Use /wand to get a new one!");
                             return;
                         }
@@ -34,14 +33,14 @@ public class WandListener implements Listener {
     }
 
     @EventHandler
-    public void onInteract(PlayerInteractEvent e){
-        if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)){
-            if (e.getPlayer().getItemInHand() != null){
-                if (e.getPlayer().getItemInHand().getItemMeta() != null){
-                    if (e.getPlayer().getItemInHand().getItemMeta().hasDisplayName()){
-                        if (ChatColor.stripColor(e.getPlayer().getItemInHand().getItemMeta().getDisplayName()).equalsIgnoreCase("practice wand")){
+    public void onInteract(PlayerInteractEvent e) {
+        if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+            if (e.getPlayer().getItemInHand() != null) {
+                if (e.getPlayer().getItemInHand().getItemMeta() != null) {
+                    if (e.getPlayer().getItemInHand().getItemMeta().hasDisplayName()) {
+                        if (ChatColor.stripColor(e.getPlayer().getItemInHand().getItemMeta().getDisplayName()).equalsIgnoreCase("practice wand")) {
                             PracticePlayer practicePlayer = PracticePlayerManager.getPlayer(e.getPlayer());
-                            if (practicePlayer.getWand() == null){
+                            if (practicePlayer.getWand() == null) {
                                 e.getPlayer().sendMessage(ChatColor.RED + "Error! Invalid Wand! Use /wand to get a new one!");
                                 return;
                             }

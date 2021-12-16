@@ -1,14 +1,14 @@
 version: 0.1.0
 name: Practice
-Authors: [Optimus]
+Authors: [ Optimus ]
 main: com.optimus.practice.Practice
 commands:
   practiceadmin:
     description: Admin Command
-    aliases: [pa, pracadmin]
+    aliases: [ pa, pracadmin ]
   wand:
   arena:
   spawnlocation:
-    aliases: [sp, spawnloc]
+    aliases: [ sp, spawnloc ]
   queue:
   request:
