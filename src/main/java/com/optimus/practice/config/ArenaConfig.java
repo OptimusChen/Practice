@@ -94,7 +94,7 @@ public class ArenaConfig {
                 arena = new BoxingArena(config);
                 break;
             case NODEBUFF:
-                arena = new PvPArena(config, (ArrayList<ItemStack>) config.getValue("kit"), (ArrayList<ItemStack>) config.getValue("kit"));
+                arena = new PvPArena(config, (ArrayList<ItemStack>) config.getValue("kit"), (ArrayList<ItemStack>) config.getValue("armor"));
                 break;
             default:
                 arena = new PvPArena(config, new ArrayList<>(), new ArrayList<>());

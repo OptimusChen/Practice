@@ -235,6 +235,9 @@ public abstract class Arena implements Listener {
         if (e.getEntity() instanceof Player){
             Player player = (Player) e.getEntity();
             if (players.contains(player)){
+                if (!finishedCountdown){
+                    e.setCancelled(true);
+                }
                 if (player.getHealth() - e.getFinalDamage() <= 0){
                     end(PracticePlayerManager.getPlayer(player));
                     player.setHealth(20.0f);
@@ -247,7 +250,9 @@ public abstract class Arena implements Listener {
     public void onMove(PlayerMoveEvent e){
         if (players.contains(e.getPlayer())){
             if (!finishedCountdown){
-                 e.setCancelled(true);
+                if (e.getFrom().getX() != e.getTo().getX() || e.getFrom().getZ() != e.getTo().getZ()){
+                    e.setCancelled(true);
+                }
             }
         }
     }

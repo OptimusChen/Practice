@@ -6,6 +6,7 @@ import com.optimus.practice.arena.ArenaType;
 import com.optimus.practice.player.PracticePlayer;
 import com.optimus.practice.player.PracticePlayerManager;
 import com.optimus.practice.scoreboard.ScoreboardState;
+import org.bukkit.ChatColor;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
@@ -49,7 +50,7 @@ public abstract class Queue {
     }
 
     public int getAmount(ArenaType type){
-        return players.get(type).size();
+        return players.get(type).size();    
     }
 
     public void update(){
@@ -59,14 +60,12 @@ public abstract class Queue {
             if (practicePlayers.size() >= 2){
                 boolean hasStarted = false;
 
-                while (!hasStarted){
-                    for (Map.Entry<UUID, Arena> entry2 : Practice.getArenaManager().getRegistered().entrySet()){
-                        Arena arena = entry2.getValue();
-                        if (!arena.isActive()){
-                            if (arena.getName().equalsIgnoreCase(type.name())){
-                                arena.start(practicePlayers.get(0).getPlayer(), practicePlayers.get(1).getPlayer());
-                                hasStarted = true;
-                            }
+                for (Map.Entry<UUID, Arena> entry2 : Practice.getArenaManager().getRegistered().entrySet()){
+                    Arena arena = entry2.getValue();
+                    if (!arena.isActive()){
+                        if (arena.getName().equalsIgnoreCase(type.name())){
+                            arena.start(practicePlayers.get(0).getPlayer(), practicePlayers.get(1).getPlayer());
+                            hasStarted = true;
                         }
                     }
                 }
@@ -74,8 +73,13 @@ public abstract class Queue {
                 PracticePlayer player1 = practicePlayers.get(0);
                 PracticePlayer player2 = practicePlayers.get(1);
 
-                player1.setOpponent(player2);
-                player2.setOpponent(player1);
+                if (hasStarted){
+                    player1.setOpponent(player2);
+                    player2.setOpponent(player1);
+                }else{
+                    player1.getPlayer().sendMessage(ChatColor.RED + "We couldn't find a free arena for this gamemode!");
+                    player2.getPlayer().sendMessage(ChatColor.RED + "We couldn't find a free arena for this gamemode!");
+                }
 
                 practicePlayers.remove(player1);
                 practicePlayers.remove(player2);

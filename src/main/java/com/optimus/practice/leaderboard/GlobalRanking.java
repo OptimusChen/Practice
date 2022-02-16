@@ -26,6 +26,7 @@ public class GlobalRanking {
         return calculate();
     }
 
+    //Not functional yet because im bad at math
     private int calculate(){
         File folder = new File(practice.getDataFolder() + File.separator + "Players");
         if (!folder.exists()) {

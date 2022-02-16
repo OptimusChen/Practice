@@ -35,7 +35,9 @@ public abstract class PracticeInventory {
         }
 
         for (int i = 10; i < inventory.getSize() - 10; i++){
-            inventory.setItem(i, null);
+            if (i % 9 != 0 && (i + 1) % 9 != 0){
+                inventory.setItem(i, null);
+            }
         }
     }
 

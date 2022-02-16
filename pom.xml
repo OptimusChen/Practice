@@ -64,14 +64,14 @@
             <artifactId>kaptcha</artifactId>
             <version>2.3</version>
             <scope>system</scope>
-            <systemPath>c:/Users/derek/Desktop/download_backup/craftbukkit-1.8.8-R0.1-SNAPSHOT.jar</systemPath>
+            <systemPath>c:/Users/derek/Desktop/Code/craftbukkit-1.8.8-R0.1-SNAPSHOT.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.google.code</groupId>
             <artifactId>worldedit</artifactId>
             <version>2.0</version>
             <scope>system</scope>
-            <systemPath>c:/Users/derek/Desktop/download_backup/worldedit-bukkit-6.1.jar</systemPath>
+            <systemPath>c:/Users/derek/Desktop/Code/worldedit-bukkit-6.1.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.reflections</groupId>
@@ -94,7 +94,7 @@
             <artifactId>actionbarapi</artifactId>
             <version>2.3</version>
             <scope>system</scope>
-            <systemPath>c:/Users/derek/Downloads/ActionBarAPI-1.5.4.jar</systemPath>
+            <systemPath>c:/Users/derek/Desktop/Code/ActionBarAPI-1.5.4.jar</systemPath>
     </dependency>
     </dependencies>
 

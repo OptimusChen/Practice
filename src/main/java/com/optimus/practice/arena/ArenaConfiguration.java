@@ -27,6 +27,7 @@ public class ArenaConfiguration {
         try{
             configuration.set(path, item);
             configuration.save(file);
+            update();
         }catch(IOException e){
             e.printStackTrace();
         }

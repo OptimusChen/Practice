@@ -26,6 +26,7 @@ public class PlayerConfiguration {
         try {
             config.set(path, item);
             config.save(file);
+            update();
         }catch (IOException e){
             e.printStackTrace();
         }
